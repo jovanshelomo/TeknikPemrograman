@@ -11,6 +11,9 @@ public class BigNumber {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        BigInteger s;
+        String tes = "1234";
+        s = BigInteger.valueOf
         Scanner sc = new Scanner(System.in);
         
         BigInteger a = new BigInteger(sc.next());
