@@ -1,5 +1,7 @@
 package com.tekpro.crud.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.tekpro.crud.entity.Cinema;
 import com.tekpro.crud.service.CinemaService;
 import java.util.List;
@@ -20,32 +22,52 @@ public class CinemaController implements BaseController<Cinema, String> {
     CinemaService cinemaService;
 
     @Override
-    @GetMapping(value = "/getCinema")
+    @GetMapping(value = "/cinema")
     public List<Cinema> getAll() {
         return cinemaService.getAll();
     }
 
     @Override
-    @GetMapping(value = "/getCinema", params = "id")
+    @GetMapping(value = "/cinema", params = "id")
     public Cinema getById(@RequestParam String id) {
         return cinemaService.getById(id);
     }
 
     @Override
-    @PostMapping(value = "/addCinema")
+    @PostMapping(value = "/cinema")
     public String save(@RequestBody Cinema c) {
         return cinemaService.save(c);
     }
 
     @Override
-    @DeleteMapping(value = "/deleteCinema")
+    @PostMapping(value = "/cinema", params = "type")
+    public String saveMultiple(@RequestBody String s, @RequestParam String type) {
+        if (type.equals("multi")) {
+            return cinemaService.saveMultiple(s);
+        } else {
+            return "Unknown param";
+        }
+    }
+
+    @Override
+    @DeleteMapping(value = "/cinema")
     public String delete(@RequestParam String id) {
         return cinemaService.delete(id);
     }
 
     @Override
-    @PatchMapping(value = "/updateCinema")
+    @PatchMapping(value = "/cinema")
     public String update(@RequestBody Cinema c) {
         return cinemaService.update(c);
+    }
+
+    @Override
+    @PatchMapping(value = "/cinema", params = "type")
+    public String updateMultiple(@RequestBody String s, @RequestParam String type) {
+        if (type.equals("multi")) {
+            return cinemaService.updateMultiple(s);
+        } else {
+            return "Unknown param";
+        }
     }
 }

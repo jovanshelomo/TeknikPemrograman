@@ -12,8 +12,12 @@ public interface CrudService<T, ID> {
     T getById(ID id);
 
     String save(T object);
-    
-    String update(T object);
+
+    String saveMultiple(String JSONString);
 
     String delete(ID id);
+
+    String update(T object);
+    
+    String updateMultiple(String JSONString);
 }

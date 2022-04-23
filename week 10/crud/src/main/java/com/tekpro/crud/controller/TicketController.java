@@ -20,32 +20,52 @@ public class TicketController implements BaseController<Ticket, String> {
     TicketService ticketService;
 
     @Override
-    @GetMapping(value = "/getTicket")
+    @GetMapping(value = "/ticket")
     public List<Ticket> getAll() {
         return ticketService.getAll();
     }
 
     @Override
-    @GetMapping(value = "/getTicket", params = "id")
+    @GetMapping(value = "/ticket", params = "id")
     public Ticket getById(@RequestParam String id) {
         return ticketService.getById(id);
     }
 
     @Override
-    @PostMapping(value = "/addTicket")
+    @PostMapping(value = "/ticket")
     public String save(@RequestBody Ticket c) {
         return ticketService.save(c);
     }
 
     @Override
-    @DeleteMapping(value = "/deleteTicket")
+    @PostMapping(value = "/ticket", params = "type")
+    public String saveMultiple(@RequestBody String s, @RequestParam String type) {
+        if (type.equals("multi")) {
+            return ticketService.saveMultiple(s);
+        } else {
+            return "Unknown param";
+        }
+    }
+
+    @Override
+    @DeleteMapping(value = "/ticket")
     public String delete(@RequestParam String id) {
         return ticketService.delete(id);
     }
 
     @Override
-    @PatchMapping(value = "/updateTicket")
+    @PatchMapping(value = "/ticket")
     public String update(@RequestBody Ticket c) {
         return ticketService.update(c);
+    }
+
+    @Override
+    @PatchMapping(value = "/ticket", params = "type")
+    public String updateMultiple(@RequestBody String s, @RequestParam String type) {
+        if (type.equals("multi")) {
+            return ticketService.updateMultiple(s);
+        } else {
+            return "Unknown param";
+        }
     }
 }
