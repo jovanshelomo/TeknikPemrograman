@@ -11,11 +11,7 @@ public interface BaseController<T, ID> {
         
         String save(T object);
         
-        String saveMultiple(String JSONString, String type);
-        
         String delete(ID id);
         
         String update(T object);
-        
-        String updateMultiple(String JSONString, String type);
 }
